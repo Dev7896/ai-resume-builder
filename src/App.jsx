@@ -1,7 +1,12 @@
+import { useUser } from "@clerk/clerk-react";
+import { Navigate, Outlet } from "react-router-dom";
 function App() {
-  // const [count, setCount] = useState(0)
+  const { user, isLoaded, isSignedIn } = useUser();
 
-  return <div className="text-2xl text-red-400">Hello world</div>;
+  if (!isSignedIn) {
+    return <Navigate to="/auth/signup" />;
+  }
+  return <Outlet />;
 }
 
 export default App;
